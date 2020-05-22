@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="toBuyListApp">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <title>ToBuyList</title>
+  </head>
+  <body>
+    <div class="heading">
+      <h1>To <span>Buy</span> List App</h1>
+    </div>
+
+    <div id="section">
+      <div class="blockOfList" ng-controller="toBuyList as list1">
+        <h1>To <span>Buy</span></h1><hr>
+        <div class="input">
+          <input type="text" ng-model="list1.itemName" placeholder="Enter eatable name...">
+          <input type="text" ng-model="list1.itemQuantity" placeholder="Enter quantity..."><br>
+          <button type="button" name="button" ng-click="list1.addItem()">Add Item</button>
+        </div><br>
+        <div ng-if="list1.items.length===0">
+          <p>Everything Bought</p>
+        </div>
+
+        <ul>
+            <li ng-repeat="item in list1.items">
+              {{item.itemQuantity}} of {{item.itemName}}
+              <button class="nested" ng-click="list1.removeThisItem($index);">Bought</button>
+            </li>
+        </ul>
+      </div>
+
+      <div class="blockOfList" ng-controller="alreadyBoughtList as list2">
+        <h1>Already<span> Bought</span></h1><hr>
+          <div ng-if="list2.alreadyBoughtItems.length===0">
+            <p>{{list2.label}}</p>
+          </div>
+
+          <ul>
+            <li ng-repeat="item in list2.alreadyBoughtItems">
+              Bought {{item.itemQuantity}} {{item.itemName}}.
+            </li>
+          </ul>
+      </div>
+    </div>
+  </body>
+</html>
